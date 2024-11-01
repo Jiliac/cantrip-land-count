@@ -13,7 +13,7 @@ cantrip_prob_3 <- 1 - cantrip_prob_2 # 50% chance to see 3 cards
 # Recursive function to process cards
 process_cards <- function(deck, pointer, lands_drawn, mana_available) {
   if (mana_available <= 0 || pointer > length(deck)) {
-    return(list(lands_drawn = lands_drawn, pointer = pointer))
+    return(pointer)
   }
   
   cantrip_index <- which(deck[1:pointer] == "cantrip")[1]
@@ -22,14 +22,10 @@ process_cards <- function(deck, pointer, lands_drawn, mana_available) {
     # Process the cantrip
     mana_available <- mana_available - 1
     deck[cantrip_index] <- "cantrip_casted"
-    result <- process_cards(deck, pointer + 1, lands_drawn, mana_available)
-    lands_drawn <- result$lands_drawn
-    pointer <- result$pointer
-  } else {
-    lands_drawn <- sum(deck[1:pointer] == "land")
+    pointer <- process_cards(deck, pointer + 1, lands_drawn, mana_available)
   }
   
-  return(list(lands_drawn = lands_drawn, pointer = pointer))
+  return(pointer)
 }
 
 # Monte Carlo Simulation
@@ -50,12 +46,11 @@ simulate_draws <- function(turn) {
       mana_available <- min(lands_drawn, t)
       
       # Process cards with available mana
-      result <- process_cards(deck, cards_seen + 1, lands_drawn, mana_available)
-      lands_drawn <- result$lands_drawn
-      cards_seen <- result$pointer
+      cards_seen <- process_cards(deck, cards_seen + 1, lands_drawn, mana_available)
     }
     
     # Check if we have exactly 4 lands at the end of the turn
+    lands_drawn <- sum(deck[1:cards_seen] == "land")
     if (lands_drawn >= 4) {
       success_count <- success_count + 1
     }
