@@ -36,17 +36,19 @@ simulate_draws <- function(turn) {
   for (sim in 1:num_simulations) {
     deck <- c(rep("land", num_lands), rep("cantrip", num_cantrips), rep("other", deck_size - num_lands - num_cantrips))
     deck <- sample(deck, deck_size) # Shuffle the deck
-    lands_drawn <- sum(deck[1:7] == "land")
     cards_seen <- 7
+    lands_drawn <- sum(deck[1:cards_seen] == "land")
     
-    # Calculate mana available for the current turn
-    mana_available <- min(lands_drawn, turn)
-    
-    # Process cards with available mana
-    lands_drawn <- process_cards(deck, cards_seen + 1, lands_drawn, mana_available)
+    for (t in 1:turn) {
+      # Calculate mana available for the current turn
+      mana_available <- min(lands_drawn, t)
+      
+      # Process cards with available mana
+      lands_drawn <- process_cards(deck, cards_seen + 1, lands_drawn, mana_available)
+    }
     
     # Check if we have exactly 4 lands at the end of the turn
-    if (lands_drawn == 4) {
+    if (lands_drawn >= 4) {
       success_count <- success_count + 1
     }
   }
