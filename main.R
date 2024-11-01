@@ -3,7 +3,7 @@ set.seed(42) # For reproducibility
 # Parameters
 num_simulations <- 10000
 deck_size <- 60
-num_lands <- 22
+num_lands_range <- 18:22
 turns <- c(4, 5, 6, 7)
 
 num_cantrips <- 10
@@ -63,9 +63,13 @@ simulate_draws <- function(turn) {
 }
 
 # Run the simulation for each turn
-results <- sapply(turns, simulate_draws)
+results <- sapply(num_lands_range, function(num_lands) {
+  sapply(turns, simulate_draws)
+})
 
 # Display the results
-results_df <- data.frame(Turn = turns, Probability = results)
+results_df <- do.call(rbind, lapply(seq_along(num_lands_range), function(i) {
+  data.frame(Lands = num_lands_range[i], Turn = turns, Probability = results[, i])
+}))
 print(results_df)
 
