@@ -17,8 +17,8 @@ simulate_draws <- function(turn) {
   for (sim in 1:num_simulations) {
     deck <- c(rep("land", num_lands), rep("cantrip", num_cantrips), rep("other", deck_size - num_lands - num_cantrips))
     deck <- sample(deck, deck_size) # Shuffle the deck
-    lands_drawn <- 0
-    cards_seen <- 0
+    lands_drawn <- sum(deck[1:7] == "land")
+    cards_seen <- 7
     cantrip_draws <- 0
     
     # Draw cards until the specified turn
@@ -31,11 +31,11 @@ simulate_draws <- function(turn) {
         lands_drawn <- lands_drawn + 1
       } else if (card == "cantrip") {
         cantrip_draws <- cantrip_draws + 1
-        # Simulate the cantrip seeing 2 or 3 additional cards
-        if (runif(1) < cantrip_prob_2) {
-          cards_seen <- min(cards_seen + 2, deck_size)
-        } else {
-          cards_seen <- min(cards_seen + 3, deck_size)
+        # Recast the cantrip and check the next card
+        next_card <- deck[cards_seen + 1]
+        cards_seen <- cards_seen + 1
+        if (next_card == "land") {
+          lands_drawn <- lands_drawn + 1
         }
       }
       
