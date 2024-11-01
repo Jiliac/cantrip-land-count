@@ -16,16 +16,15 @@ process_cards <- function(deck, pointer, lands_drawn, mana_available) {
     return(lands_drawn)
   }
   
-  card <- deck[pointer]
-  
-  if (card == "land") {
-    lands_drawn <- lands_drawn + 1
-  } else if (card == "cantrip") {
-    mana_available <- mana_available - 1
-    deck[pointer] <- "cantrip_casted"
-    lands_drawn <- process_cards(deck, pointer + 1, lands_drawn, mana_available)
+  cantrip_index <- which(deck[1:pointer] == "cantrip")[1]                                                                                                                
+                                                                                                                                                                          
+  if (is.na(cantrip_index)) {                                                                                                                                           
+    lands_drawn <- sum(deck[1:pointer] == "land")
   }
-  
+
+  # Process the cantrip                                                                                                                                                
+  mana_available <- mana_available - 1                                                                                                                                 
+  deck[cantrip_index] <- "cantrip_casted"                                                                                                                              
   return(process_cards(deck, pointer + 1, lands_drawn, mana_available))
 }
 
@@ -40,6 +39,9 @@ simulate_draws <- function(turn) {
     lands_drawn <- sum(deck[1:cards_seen] == "land")
     
     for (t in 1:turn) {
+      cards_seen <- cards_seen + 1 # Note: Actually on the first turn, this only has 50% chance of happening...
+      lands_drawn <- sum(deck[1:cards_seen] == "land")
+
       # Calculate mana available for the current turn
       mana_available <- min(lands_drawn, t)
       
