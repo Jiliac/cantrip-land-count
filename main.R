@@ -53,8 +53,7 @@ simulate_draws <- function(turn) {
     }
     
     # Check if we have exactly 4 lands at the end of the turn
-    lands_drawn <- sum(deck[1:cards_seen] == "land")
-    if (lands_drawn >= 4) {
+    if (!is.na(lands_drawn) && lands_drawn >= 4) {
       success_count <- success_count + 1
     }
   }
