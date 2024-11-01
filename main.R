@@ -3,7 +3,7 @@ set.seed(42) # For reproducibility
 # Parameters
 num_simulations <- 10000
 deck_size <- 60
-num_lands_range <- 18:22
+num_lands_range <- 21:22
 turns <- c(4, 5, 6, 7)
 
 num_cantrips <- 10
@@ -30,7 +30,7 @@ process_cards <- function(deck, pointer, lands_drawn, mana_available) {
 }
 
 # Monte Carlo Simulation
-simulate_draws <- function(turn) {
+simulate_draws <- function(turn, num_lands) {
   success_count <- 0
   
   for (sim in 1:num_simulations) {
@@ -64,7 +64,7 @@ simulate_draws <- function(turn) {
 
 # Run the simulation for each turn
 results <- sapply(num_lands_range, function(num_lands) {
-  sapply(turns, simulate_draws)
+  sapply(turns, function(turn) simulate_draws(turn, num_lands))
 })
 
 # Display the results
