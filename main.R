@@ -13,19 +13,23 @@ cantrip_prob_3 <- 1 - cantrip_prob_2 # 50% chance to see 3 cards
 # Recursive function to process cards
 process_cards <- function(deck, pointer, lands_drawn, mana_available) {
   if (mana_available <= 0 || pointer > length(deck)) {
-    return(lands_drawn)
+    return(list(lands_drawn = lands_drawn, pointer = pointer))
   }
   
-  cantrip_index <- which(deck[1:pointer] == "cantrip")[1]                                                                                                                
-                                                                                                                                                                          
-  if (is.na(cantrip_index)) {                                                                                                                                           
+  cantrip_index <- which(deck[1:pointer] == "cantrip")[1]
+  
+  if (!is.na(cantrip_index)) {
+    # Process the cantrip
+    mana_available <- mana_available - 1
+    deck[cantrip_index] <- "cantrip_casted"
+    result <- process_cards(deck, pointer + 1, lands_drawn, mana_available)
+    lands_drawn <- result$lands_drawn
+    pointer <- result$pointer
+  } else {
     lands_drawn <- sum(deck[1:pointer] == "land")
   }
-
-  # Process the cantrip                                                                                                                                                
-  mana_available <- mana_available - 1                                                                                                                                 
-  deck[cantrip_index] <- "cantrip_casted"                                                                                                                              
-  return(process_cards(deck, pointer + 1, lands_drawn, mana_available))
+  
+  return(list(lands_drawn = lands_drawn, pointer = pointer))
 }
 
 # Monte Carlo Simulation
@@ -46,7 +50,9 @@ simulate_draws <- function(turn) {
       mana_available <- min(lands_drawn, t)
       
       # Process cards with available mana
-      lands_drawn <- process_cards(deck, cards_seen + 1, lands_drawn, mana_available)
+      result <- process_cards(deck, cards_seen + 1, lands_drawn, mana_available)
+      lands_drawn <- result$lands_drawn
+      cards_seen <- result$pointer
     }
     
     # Check if we have exactly 4 lands at the end of the turn
