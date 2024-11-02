@@ -6,7 +6,7 @@ deck_size <- 60
 num_lands_range <- 19:22
 turns <- c(4, 5, 6, 7)
 
-num_cantrips <- 10
+num_cantrips_range <- 8:10
 cantrip_prob_2 <- 0.5 # 50% chance to see 2 cards
 cantrip_prob_3 <- 1 - cantrip_prob_2 # 50% chance to see 3 cards
 
@@ -66,15 +66,19 @@ simulate_draws <- function(turn, num_lands) {
   return(success_count / num_simulations)
 }
 
-# Run the simulation for each turn
-results <- sapply(num_lands_range, function(num_lands) {
-  sapply(turns, function(turn) simulate_draws(turn, num_lands))
-})
-
-# Convert results to a matrix for better display
-results_matrix <- matrix(results, nrow = length(num_lands_range), ncol = length(turns), byrow = TRUE)
-rownames(results_matrix) <- paste("Lands", num_lands_range)
-colnames(results_matrix) <- paste("Turn", turns)
-
-# Print the matrix with percentages
-print(formatC(results_matrix * 100, format = "f", digits = 1), quote = FALSE)
+# Run the simulation for each number of cantrips
+for (num_cantrips in num_cantrips_range) {
+  # Run the simulation for each turn
+  results <- sapply(num_lands_range, function(num_lands) {
+    sapply(turns, function(turn) simulate_draws(turn, num_lands))
+  })
+  
+  # Convert results to a matrix for better display
+  results_matrix <- matrix(results, nrow = length(num_lands_range), ncol = length(turns), byrow = TRUE)
+  rownames(results_matrix) <- paste("Lands", num_lands_range)
+  colnames(results_matrix) <- paste("Turn", turns)
+  
+  # Print the matrix with percentages
+  cat("\nNumber of Cantrips:", num_cantrips, "\n")
+  print(formatC(results_matrix * 100, format = "f", digits = 1), quote = FALSE)
+}
