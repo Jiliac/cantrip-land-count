@@ -9,31 +9,28 @@ This project is a Monte Carlo simulation designed to calculate the probability o
 The simulation results for different numbers of cantrips are as follows:
 
 ### Number of Cantrips: 8
-```
-         Turn 4 Turn 5 Turn 6 Turn 7
-Lands 19 91.0   96.6   99.0   99.8  
-Lands 20 93.6   97.8   99.4   99.8  
-Lands 21 95.2   98.5   99.6   99.9  
-Lands 22 96.3   99.2   99.8   99.9  
-```
+| Lands/Turns | Turn 4 | Turn 5 | Turn 6 | Turn 7 |                                                                                                                       
+|------------| --- | --- | --- | --- |                                                                                                                                    
+| Lands 19 | 91.0 | 96.6 | 99.0 | 99.8 |                                                                                                                                  
+| Lands 20 | 93.6 | 97.8 | 99.4 | 99.8 |                                                                                                                                  
+| Lands 21 | 95.2 | 98.5 | 99.6 | 99.9 |
+| Lands 22 | 96.3 | 99.2 | 99.8 | 99.9 |
 
 ### Number of Cantrips: 9
-```
-         Turn 4 Turn 5 Turn 6 Turn 7
-Lands 19 92.7   97.3   99.1   99.8  
-Lands 20 95.1   98.4   99.7   99.9  
-Lands 21 96.3   98.8   99.7   100.0 
-Lands 22 97.5   99.4   99.9   100.0 
-```
+| Lands/Turns | Turn 4 | Turn 5 | Turn 6 | Turn 7 |
+|------------| --- | --- | --- | --- |
+| Lands 19 | 92.7 | 97.3 | 99.1 | 99.8 |
+| Lands 20 | 95.1 | 98.4 | 99.7 | 99.9 |
+| Lands 21 | 96.3 | 98.8 | 99.7 | 100.0 |
+| Lands 22 | 97.5 | 99.4 | 99.9 | 100.0 |
 
 ### Number of Cantrips: 10
-```
-         Turn 4 Turn 5 Turn 6 Turn 7
-Lands 19 94.2   98.2   99.5   99.9  
-Lands 20 96.0   98.7   99.7   99.9  
-Lands 21 96.9   99.1   99.8   100.0 
-Lands 22 98.0   99.5   99.9   100.0 
-```
+| Lands/Turns | Turn 4 | Turn 5 | Turn 6 | Turn 7 |
+|------------| --- | --- | --- | --- |
+| Lands 19 | 94.2 | 98.2 | 99.5 | 99.9 |
+| Lands 20 | 96.0 | 98.7 | 99.7 | 99.9 |
+| Lands 21 | 96.9 | 99.1 | 99.8 | 100.0 |
+| Lands 22 | 98.0 | 99.5 | 99.9 | 100.0 |
 
 ## Assumptions and Limitations
 

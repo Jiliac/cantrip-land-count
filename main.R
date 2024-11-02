@@ -78,7 +78,11 @@ for (num_cantrips in num_cantrips_range) {
   rownames(results_matrix) <- paste("Lands", num_lands_range)
   colnames(results_matrix) <- paste("Turn", turns)
   
-  # Print the matrix with percentages
-  cat("\nNumber of Cantrips:", num_cantrips, "\n")
-  print(formatC(results_matrix * 100, format = "f", digits = 1), quote = FALSE)
+  # Print the matrix as a markdown table with percentages
+  cat("\n## Number of Cantrips:", num_cantrips, "\n\n")
+  cat("| Lands/Turns |", paste(colnames(results_matrix), collapse = " | "), "|\n")
+  cat("|------------|", paste(rep("---", ncol(results_matrix)), collapse = " | "), "|\n")
+  for (i in 1:nrow(results_matrix)) {
+    cat("|", rownames(results_matrix)[i], "|", paste(formatC(results_matrix[i, ] * 100, format = "f", digits = 1), collapse = " | "), "|\n")
+  }
 }
