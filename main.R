@@ -76,5 +76,5 @@ results_matrix <- matrix(results, nrow = length(num_lands_range), ncol = length(
 rownames(results_matrix) <- paste("Lands", num_lands_range)
 colnames(results_matrix) <- paste("Turn", turns)
 
-# Print the matrix
-print(results_matrix)
+# Print the matrix with percentages
+print(formatC(results_matrix * 100, format = "f", digits = 1), quote = FALSE)
