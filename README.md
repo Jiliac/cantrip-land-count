@@ -1,5 +1,14 @@
 # Monte Carlo Simulation for Card Draw Probability
 
+## Table of Contents
+
+- [Project Overview](#project-overview)
+- [Results](#results)
+- [Assumptions and Limitations](#assumptions-and-limitations)
+- [How to Run](#how-to-run)
+- [Parameter Details](#parameter-details)
+- [Changing Parameters](#changing-parameters)
+
 ## Project Overview
 
 This project is a Monte Carlo simulation designed to calculate the probability of drawing a certain number of lands by a specific turn in a card game. The simulation considers different numbers of lands and cantrips in the deck, and outputs the probability of having at least four lands by turns 4, 5, 6, and 7.
