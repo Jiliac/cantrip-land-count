@@ -11,7 +11,9 @@
 
 ## Project Overview
 
-This project is a Monte Carlo simulation designed to calculate the probability of drawing a certain number of lands by a specific turn in a card game. The simulation considers different numbers of lands and cantrips in the deck, and outputs the probability of having at least four lands by turns 4, 5, 6, and 7.
+In the world of card games, determining the right number of lands in your deck is crucial for ensuring you have the resources needed to play your cards effectively. This project focuses on the scenario where cantrips are involved. Cantrips allow players to see more cards, which can significantly alter how a mana base is constructed. For a deeper understanding of land requirements, you can refer to [Karsten's article on ChannelFireball](https://www.channelfireball.com/article/How-Many-Lands-Do-You-Need-in-Your-Deck-An-Updated-Analysis/cd1c1a24-d439-4a8e-b369-b936edb0b38a/).
+
+Due to the complexity introduced by cantrips, an exact formula for determining land probabilities becomes impractical. Therefore, we employ a Monte Carlo simulation to estimate these probabilities. The simulation outputs the probability of having at least four lands by turns 4, 5, 6, and 7, considering various configurations of lands and cantrips in the deck.
 
 ## Results
 
