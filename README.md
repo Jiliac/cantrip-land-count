@@ -47,7 +47,23 @@ The simulation results for different numbers of cantrips are as follows:
 Rscript main.R
 ```
 
-## Changing Parameters
+### Parameter Details
+
+The simulation is controlled by several parameters defined in the `main.R` file:
+
+- **Number of Simulations (`num_simulations`)**: This parameter sets the number of iterations for the simulation. A higher number of simulations will yield more accurate results but will take longer to compute. The default is set to 10,000.
+
+- **Deck Size (`deck_size`)**: This represents the total number of cards in the deck. The standard deck size is 60 cards.
+
+- **Number of Lands (`num_lands_range`)**: This range specifies the different numbers of lands to simulate within the deck. The simulation will run for each value in this range, which is set from 19 to 22 lands.
+
+- **Turns (`turns`)**: This vector defines the specific turns for which the probabilities of drawing lands are calculated. The default turns are 4, 5, 6, and 7.
+
+- **Number of Cantrips (`num_cantrips_range`)**: This range specifies the different numbers of cantrips to simulate within the deck. The simulation will run for each value in this range, which is set from 8 to 10 cantrips.
+
+- **Cantrip Probabilities (`cantrip_prob_2` and `cantrip_prob_3`)**: These parameters define the probabilities of drawing 2 or 3 cards when a cantrip is played. By default, there is a 50% chance to draw 2 cards (`cantrip_prob_2`) and a 50% chance to draw 3 cards (`cantrip_prob_3`).
+
+### Changing Parameters
 
 - **Number of Simulations**: Modify `num_simulations` to change the number of iterations for the simulation.
 - **Deck Size**: Adjust `deck_size` to reflect the total number of cards in the deck.
