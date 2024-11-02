@@ -3,7 +3,7 @@ set.seed(42) # For reproducibility
 # Parameters
 num_simulations <- 10000
 deck_size <- 60
-num_lands_range <- 21:22
+num_lands_range <- 19:22
 turns <- c(4, 5, 6, 7)
 
 num_cantrips <- 10
@@ -71,9 +71,10 @@ results <- sapply(num_lands_range, function(num_lands) {
   sapply(turns, function(turn) simulate_draws(turn, num_lands))
 })
 
-# Display the results
-results_df <- do.call(rbind, lapply(seq_along(num_lands_range), function(i) {
-  data.frame(Lands = num_lands_range[i], Turn = turns, Probability = results[, i])
-}))
-print(results_df)
+# Convert results to a matrix for better display
+results_matrix <- matrix(results, nrow = length(num_lands_range), ncol = length(turns), byrow = TRUE)
+rownames(results_matrix) <- paste("Lands", num_lands_range)
+colnames(results_matrix) <- paste("Turn", turns)
 
+# Print the matrix
+print(results_matrix)
